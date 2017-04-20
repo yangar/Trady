@@ -75,8 +75,19 @@ namespace Trady.Analysis.Strategy
             }
         }
 
-        public decimal ProfitLossRatio => TotalProfitRate / (TotalProfitRate + TotalLossRate);
-
+        //public decimal ProfitLossRatio => TotalProfitRate / (TotalProfitRate + TotalLossRate);
+        //throw exception when TotalProfitRate + TotalLossRate = 0
+        public decimal ProfitLossRatio
+        {
+            get
+            {
+                if (TotalProfitRate + TotalLossRate != 0)
+                    return TotalProfitRate / (TotalProfitRate + TotalLossRate);
+                else
+                    return 0;
+            }
+        }
+        
         public decimal Principal => _principal;
 
         public decimal TotalPremium => _premium * TotalTransactionsCount;
